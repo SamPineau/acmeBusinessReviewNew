@@ -13,6 +13,7 @@ function App() {
 
   useEffect(()=> {
     attemptLoginWithToken();
+    fetchUsers(); 
   }, []);
 
   const attemptLoginWithToken = async()=> {
@@ -55,6 +56,34 @@ function App() {
   const logout = ()=> {
     window.localStorage.removeItem('token');
     setAuth({});
+  };
+
+  const fetchBusinesses = async () => {
+    try {
+      const response = await fetch('/api/businesses');
+      if (response.ok) {
+        const data = await response.json();
+        setBusinesses(data); 
+      } else {
+        console.error('Failed to fetch businesses');
+      }
+    } catch (error) {
+      console.error('Error fetching businesses:', error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('/api/users'); 
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(data); 
+      } else {
+        console.error('Failed to fetch users');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   };
 
   return (

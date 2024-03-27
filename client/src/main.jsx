@@ -1,13 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { HashRouter as Router } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import BusinessList from './BusinessList';
+import BusinessDetails from './BusinessDetails';
+import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <Switch>
+        <Route exact path="/" component={BusinessList} />
+        <Route path="/businesses/:id" component={BusinessDetails} />
+      </Switch>
     </Router>
   </React.StrictMode>,
-)
+  document.getElementById('root')
+);
+
+
